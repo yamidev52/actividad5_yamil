@@ -14,8 +14,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,5 +47,22 @@ public class MainActivity extends AppCompatActivity {
         ibClear = findViewById(R.id.ibClear);
         etDescription = findViewById(R.id.etDescription);
         lvItems = findViewById(R.id.lvItems);
+
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(
+                this, R.array.categorias, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(spinnerAdapter);
+
+        listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+        lvItems.setAdapter(listAdapter);
+
+        calendar = Calendar.getInstance();
+        updateDate();
+
+    }
+
+    private void updateDate() {
+        tvDate.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime()));
+        tvTime.setText(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.getTime()));
     }
 }
