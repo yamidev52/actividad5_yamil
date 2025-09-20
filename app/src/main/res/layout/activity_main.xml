@@ -42,11 +42,11 @@
 
         <ImageButton
             android:id="@+id/ibPickDate"
-            android:layout_width="40dp"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/cd_pick_fecha"
-            android:src="@drawable/calendario" />
+            android:src="@drawable/calendario__1_" />
     </LinearLayout>
 
     <!-- Hora -->
@@ -73,11 +73,11 @@
 
         <ImageButton
             android:id="@+id/ibPickTime"
-            android:layout_width="40dp"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/cd_pick_hora"
-            android:src="@drawable/atras_en_el_tiempo" />
+            android:src="@drawable/reloj_circular" />
     </LinearLayout>
 
     <!-- Descripción + acciones -->
@@ -94,23 +94,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/hint_descripcion"
+            android:textSize="15dp"
             android:inputType="textCapSentences" />
 
         <ImageButton
             android:id="@+id/ibAdd"
-            android:layout_width="40dp"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/cd_agregar"
-            android:src="@drawable/mas" />
+            android:src="@drawable/mas__1_" />
 
         <ImageButton
             android:id="@+id/ibClear"
-            android:layout_width="40dp"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/cd_limpiar"
-            android:src="@drawable/brocha" />
+            android:src="@drawable/cepillo_de_pintura" />
     </LinearLayout>
 
     <!-- ListView -->
