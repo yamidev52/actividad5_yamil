@@ -1,9 +1,13 @@
 package com.yamidev.actividad5;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -16,9 +20,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,14 +66,55 @@ public class MainActivity extends AppCompatActivity {
         listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
         lvItems.setAdapter(listAdapter);
 
+        lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final int pos = position;
+
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Eliminar tarea")
+                        .setMessage("¿Seguro que deseas eliminar esta tarea?")
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                items.remove(pos);
+                                listAdapter.notifyDataSetChanged();
+                                Toast.makeText(MainActivity.this, "Tarea eliminada", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("Cancelar", null)
+                        .show();
+
+                return true;
+            }
+        });
+
         // Configurar los listeners para los botones
 
         ibPickDate.setOnClickListener(v -> updateDateButton());
         ibPickTime.setOnClickListener(v -> updateTimeButton());
         ibAdd.setOnClickListener(v -> addTask());
+        ibClear.setOnClickListener(v -> deleteTask());
         calendar = Calendar.getInstance();
         updateDate();
 
+    }
+
+    public void deleteTask() {
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("Eliminar todas las tareas")
+                .setMessage("¿Seguro que deseas borrar toda la lista?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        items.clear();
+                        listAdapter.notifyDataSetChanged();
+                        Toast.makeText(MainActivity.this, "Todas las tareas fueron eliminadas", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 
     private void updateDate() {
@@ -126,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
 
 
